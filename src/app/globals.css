@@ -1,26 +1,167 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0B0F17;
+  --foreground: #FFFFFF;
+
+  --color-bg-primary: #0B0F17;
+  --color-bg-surface: #111827;
+  --color-primary: #00E5FF;
+  --color-primary-hover: #00B4D8;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #94A3B8;
+  --color-border: #1F2937;
+
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-brand-bg: var(--color-bg-primary);
+  --color-brand-surface: var(--color-bg-surface);
+  --color-brand-primary: var(--color-primary);
+  --color-brand-primary-hover: var(--color-primary-hover);
+  --color-brand-text: var(--color-text-primary);
+  --color-brand-muted: var(--color-text-secondary);
+  --color-brand-border: var(--color-border);
+
+  --color-brand-success: var(--color-success);
+  --color-brand-warning: var(--color-warning);
+  --color-brand-error: var(--color-error);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom Scrollbar for premium dark feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0F17;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2937;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom glow animations for premium aesthetics */
+.glow-primary {
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+}
+.glow-primary-hover:hover {
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+/* Micro-animations */
+.transition-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Markdown Content Rendering Styles */
+.markdown-content h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.markdown-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.markdown-content p {
+  margin-bottom: 1.25rem;
+  color: var(--color-text-secondary);
+}
+.markdown-content strong {
+  color: var(--foreground);
+}
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-text-secondary);
+}
+.markdown-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-text-secondary);
+}
+.markdown-content li {
+  margin-bottom: 0.5rem;
+}
+.markdown-content pre {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.markdown-content code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.25rem;
+  color: var(--color-primary);
+}
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: var(--foreground);
+  border-radius: 0;
+}
+.markdown-content blockquote {
+  border-left: 3px solid var(--color-primary);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+.markdown-content hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.8rem;
+}
+.markdown-content th, .markdown-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+}
+.markdown-content th {
+  background-color: var(--color-bg-surface);
+  font-weight: 600;
+  color: var(--foreground);
 }
