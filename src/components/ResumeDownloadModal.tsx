@@ -32,31 +32,20 @@ export default function ResumeDownloadModal({ isOpen, onClose }: ResumeDownloadM
     setLoading(true);
 
     try {
-      // Send API request to server backend (which relays to email service)
-      await fetch("/api/request-password", {
+      // Send email request directly to FormSubmit endpoint
+      await fetch("https://formsubmit.co/ajax/aneesh.analyst@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: cleanEmail }),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          _subject: "Requesting password for resume",
+          "User Email": cleanEmail,
+          "Message": `User ${cleanEmail} has requested the password to unlock your PDF resume.`,
+          _captcha: "false"
+        })
       });
-
-      // Also send direct client-side web request to FormSubmit as backup to guarantee delivery
-      try {
-        await fetch("https://formsubmit.co/ajax/aneesh.analyst@gmail.com", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            _subject: "Requesting password for resume",
-            "User Email": cleanEmail,
-            "Message": `User ${cleanEmail} has requested the password to unlock your PDF resume.`,
-            _captcha: "false"
-          })
-        });
-      } catch (clientErr) {
-        console.warn("Client side mail dispatch fallback:", clientErr);
-      }
 
       // Trigger automatic PDF file download
       setTimeout(() => {
@@ -69,7 +58,7 @@ export default function ResumeDownloadModal({ isOpen, onClose }: ResumeDownloadM
 
         setLoading(false);
         setSubmitted(true);
-      }, 500);
+      }, 400);
     } catch (err) {
       console.error(err);
       setLoading(false);

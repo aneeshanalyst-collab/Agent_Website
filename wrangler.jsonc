@@ -1,15 +1,7 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "agent-website",
-  "compatibility_date": "2024-09-23",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
-  "pages_build_output_dir": ".vercel/output/static",
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "agent-website"
-    }
-  ]
+  "assets": {
+    "directory": "./out"
+  },
+  "compatibility_date": "2025-09-01"
 }

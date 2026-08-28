@@ -14,6 +14,9 @@ interface BlogPostPageProps {
 // Statically generate parameters for dynamic paths at build time
 export async function generateStaticParams() {
   const posts = getAllPosts();
+  if (posts.length === 0) {
+    return [{ slug: "placeholder" }];
+  }
   return posts.map((post) => ({
     slug: post.slug,
   }));
